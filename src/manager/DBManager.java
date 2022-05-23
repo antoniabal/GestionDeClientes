@@ -3,14 +3,15 @@ package manager;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.sql.ResultSet;
 
 /**
  *
- * @author lionel
+ * @author Antonia
  */
 public class DBManager {
 
@@ -357,6 +358,28 @@ public class DBManager {
             ex.printStackTrace();
             return false;
         }
+    }
+    
+    /**
+     * Devuelve la cantidad de clientes que tenemos en nuestra base de datos
+     */
+    public static void procedimientoAlmacenado() {
+    	String sql = "{call cuenta_personas ()}";
+    	
+    	try {
+    		CallableStatement statementCallable = conn.prepareCall(sql);
+    		
+    		statementCallable.execute();    
+    	    final ResultSet rs = statementCallable.getResultSet();
+			
+    	    while (rs.next()) {  
+    	          System.out.println(rs.getString(1));
+    	    } 
+    	    
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
     }
 
 }
