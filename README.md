@@ -1,2 +1,2 @@
 # GestionDeClientes
-Añadir algún procedimiento almacenado y utilizarlo con la Clase CallableStatement. Se  puede  utilizar una  de  las  opcionesde  menúque  ya  se tiene  o  crear una  nueva específica.Evidentemente, modificando lo necesario.
+Modificar la Aplicación para permitir VOLCARen un fichero una Tabla de una Base de Datos. El contenido del fichero deberá indicar en la primera línea el nombre de la Base de Datos Origen y el de la Tabla Origen, en la segunda  las cabeceras de los campos y el las restantes líneas los campos de cada registro por línea
