@@ -3,11 +3,13 @@ package manager;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 /**
  *
@@ -380,6 +382,52 @@ public class DBManager {
 			e.printStackTrace();
 		}
 		
+    }
+    
+    /**
+     * Vuela en el fichero de salida la tabla de los clientes
+     */
+    public static void volcadoFichero() {
+    	try {
+    		File archivo_informacion = new File("salida.txt");
+    		archivo_informacion.createNewFile();
+    		
+    		ResultSet resultado = getTablaClientes();
+    		ResultSetMetaData metadatosRs= resultado.getMetaData();
+    		
+    		FileWriter writer = new FileWriter(archivo_informacion);
+    		
+    		writer.write("El nombre de la base de datos es " + DB_NAME + " y el nombre de la tabla es " + DB_CLI + "\n");
+    		
+    		// Imprime en el fichero los nombres de cada columna
+    		for(int i = 1; i <= metadatosRs.getColumnCount(); i++) {
+				writer.write(metadatosRs.getColumnName(i) + "\t");
+			}
+    		
+    		writer.write("\n");
+            
+    		//Imprime cada linea de la tabla
+            while (resultado.next()) {
+            	
+            	//Dependiendo del tipo de datos se imprime de una forma o otra
+            	for(int i = 1; i <= metadatosRs.getColumnCount(); i++) {
+            		if(metadatosRs.getColumnTypeName(i).equals("VARCHAR")) {
+                		String texto = resultado.getString(metadatosRs.getColumnName(i));
+                		writer.write(texto + "\t");
+                	}
+                	
+                	if(metadatosRs.getColumnTypeName(i).equals("INT")) {
+                		int entero = resultado.getInt(metadatosRs.getColumnName(i));
+                		writer.write(entero + "\t");
+                	}
+                }
+            	writer.write("\n");
+            }
+			
+			writer.close();
+    	}catch(Exception e) {
+    		
+    	}
     }
 
 }
