@@ -429,5 +429,32 @@ public class DBManager {
     		
     	}
     }
+    
+    /**
+     * Filtra la tabla por uno de los campos
+     * @param campo a filtrar
+     * @param filtro de texto que hay que buscar
+     */
+    public static void filtrar(String campo, String filtro) {
+    	String sql = "SELECT * FROM " + DB_CLI + " WHERE " + campo + " = ?;";
+    	
+    	try {
+    		PreparedStatement stmt = conn.prepareStatement(sql);
+    		
+    		stmt.setString(1, filtro);
+            ResultSet rs = stmt.executeQuery();
+    		
+            while (rs.next()) {
+                int id = rs.getInt(DB_CLI_ID);
+                String n = rs.getString(DB_CLI_NOM);
+                String d = rs.getString(DB_CLI_DIR);
+                System.out.println(id + "\t" + n + "\t" + d);
+            }
+            
+    	    rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
 
 }
