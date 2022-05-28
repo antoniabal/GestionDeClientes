@@ -1,4 +1,2 @@
 # GestionDeClientes
-Modificar la Aplicación para Añadir varias opciones al menú...
-
-Poder filtrar filas de una Tabla
+Modificar la aplicación para permitir borrar registros a partir de la  información  contenida  en  un  archivo  cuyo  contenido  y  estructura  es  conocida.
