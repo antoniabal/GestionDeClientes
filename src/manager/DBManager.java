@@ -4,10 +4,12 @@ package manager;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
@@ -23,7 +25,7 @@ public class DBManager {
     // Configuración de la conexión a la base de datos
     private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "3306";
-    private static final String DB_NAME = "tienda";
+    private static String DB_NAME = "tienda";
     private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?serverTimezone=UTC";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
@@ -31,7 +33,7 @@ public class DBManager {
     private static final String DB_MSQ_CONN_NO = "ERROR EN LA CONEXIÓN";
 
     // Configuración de la tabla Clientes
-    private static final String DB_CLI = "clientes";
+    private static String DB_CLI = "clientes";
     private static final String DB_CLI_SELECT = "SELECT * FROM " + DB_CLI;
     private static final String DB_CLI_ID = "id";
     private static final String DB_CLI_NOM = "nombre";
@@ -455,6 +457,31 @@ public class DBManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public static void eliminarFichero(String ruta) {
+    	File archivo = new File(ruta);
+    	String pk = "";
+    	try {
+			Scanner input = new Scanner(archivo);
+			
+			DB_NAME = input.nextLine();
+			DB_CLI = input.nextLine();
+			pk = input.nextLine();
+			
+			while(pk.length()!=0) {
+				deleteCliente(Integer.parseInt(pk.substring(0, pk.indexOf(","))));
+				pk = pk.substring(pk.indexOf(",")+1);
+			}
+			
+			input.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (StringIndexOutOfBoundsException e) {
+			deleteCliente(Integer.parseInt(pk.substring(0)));
+		}
+    	
+    	
     }
 
 }

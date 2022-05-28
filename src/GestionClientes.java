@@ -33,7 +33,8 @@ public class GestionClientes {
         System.out.println("5. Cantidad de clientes.");
         System.out.println("6. Volcar en un fichero.");
         System.out.println("7. Filtrar filas de la tabla.");
-        System.out.println("8. Salir");
+        System.out.println("8. Borrar fila de tabla a partir de fichero.");
+        System.out.println("9. Salir");
         
         Scanner in = new Scanner(System.in);
             
@@ -63,6 +64,9 @@ public class GestionClientes {
             	DBManager.filtrar(pideLinea("Campo por el que filtrar "), pideLinea("filtro "));
             	return false;
             case 8:
+            	opcionFicheroBorrado();
+            	return false;
+            case 9:
                 return true;
             default:
                 System.out.println("Opción elegida incorrecta");
@@ -168,5 +172,11 @@ public class GestionClientes {
         } else {
             System.out.println("Error :(");
         }
+    }
+    
+    public static void opcionFicheroBorrado() {
+    	String ruta = pideLinea("Ruta del archivo: ");
+    	
+    	DBManager.eliminarFichero(ruta);
     }
 }
