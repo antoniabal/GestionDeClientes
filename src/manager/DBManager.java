@@ -294,8 +294,8 @@ public class DBManager {
      * Solicita a la BD modificar los datos de un cliente
      *
      * @param id id del cliente a modificar
-     * @param nombre nuevo nombre del cliente
-     * @param direccion nueva dirección del cliente
+     * @param nuevoNombre nuevo nombre del cliente
+     * @param nuevaDireccion nueva dirección del cliente
      * @return verdadero si pudo modificarlo, false en caso contrario
      */
     public static boolean updateCliente(int id, String nuevoNombre, String nuevaDireccion) {
@@ -459,6 +459,10 @@ public class DBManager {
 		}
     }
     
+    /**
+     * Elimina de la BD a partir de un fichero
+     * @param ruta ruta del fichero
+     */
     public static void eliminarFichero(String ruta) {
     	File archivo = new File(ruta);
     	String pk = "";

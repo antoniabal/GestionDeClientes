@@ -9,6 +9,10 @@ import manager.DBManager;
  */
 public class GestionClientes {
 
+	/**
+	 * Programa principal
+	 * @param args argumentos
+	 */
     public static void main(String[] args) {
 
         DBManager.loadDriver();
@@ -23,6 +27,10 @@ public class GestionClientes {
 
     }
 
+    /**
+     * Menu principal
+     * @return devuelve true si sale de menu, false en caso contrario
+     */
     public static boolean menuPrincipal() {
         System.out.println("");
         System.out.println("MENU PRINCIPAL");
@@ -75,6 +83,11 @@ public class GestionClientes {
         
     }
     
+    /**
+     * Pide un entero
+     * @param mensaje a mostrar
+     * @return devuelve un entero introducido
+     */
     public static int pideInt(String mensaje){
         
         while(true) {
@@ -90,6 +103,11 @@ public class GestionClientes {
         }
     }
     
+    /**
+     * Pide una linea
+     * @param mensaje a mostrar
+     * @return devuelve la lina
+     */
     public static String pideLinea(String mensaje){
         
         while(true) {
@@ -104,11 +122,17 @@ public class GestionClientes {
         }
     }
 
+    /**
+     * Opción nuevo cliente a la BD
+     */
     public static void opcionMostrarClientes() {
         System.out.println("Listado de Clientes:");
         DBManager.printTablaClientes();
     }
 
+    /**
+     * Opcion para nuevo cliente de la BD
+     */
     public static void opcionNuevoCliente() {
         Scanner in = new Scanner(System.in);
 
@@ -125,6 +149,9 @@ public class GestionClientes {
         }
     }
 
+    /**
+     * Opcion modifica cliente de la BD
+     */
     public static void opcionModificarCliente() {
         Scanner in = new Scanner(System.in);
 
@@ -153,6 +180,9 @@ public class GestionClientes {
         }
     }
 
+    /**
+     * Elimina un cliente de la BD
+     */
     public static void opcionEliminarCliente() {
         Scanner in = new Scanner(System.in);
 
@@ -174,6 +204,9 @@ public class GestionClientes {
         }
     }
     
+    /**
+     * Opcion elimina fila a partir de fichero
+     */
     public static void opcionFicheroBorrado() {
     	String ruta = pideLinea("Ruta del archivo: ");
     	
